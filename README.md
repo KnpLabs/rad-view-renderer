@@ -1,14 +1,14 @@
 Rad view renderer
 =================
 
-Allow to guess a view when controller does not return a Response.
+Allow to guess a view when the controller does not return a Response.
 
 ## Installation
 
 Install the library:
 
 ```
-$ composer require knlabs/rad-view-renderer
+$ composer require knplabs/rad-view-renderer
 ```
 
 If you are using symfony2, add the bundle inside your `AppKernel.php`:
@@ -16,7 +16,7 @@ If you are using symfony2, add the bundle inside your `AppKernel.php`:
 ```php
 $bundles = array(
     // ...
-    new \Knp\Rad\ViewRenderer\Bundle\ViewRendererBundle();
+    new Knp\Rad\ViewRenderer\Bundle\ViewRendererBundle(),
 );
 ```
 
@@ -42,8 +42,8 @@ that can display many content types.
 
 ### The twig renderer
 
-One of the most usefull renderer, it takes the controller class in order to
-guess the template to display. For exemple:
+One of the most useful renderer, it takes the controller class in order to
+guess the template to display. For example:
 
 ```
 App\Controller\TestController::someAction => @App/Resources/views/Test/some.%format%.twig
