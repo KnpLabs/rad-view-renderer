@@ -34,7 +34,7 @@ class TwigRenderer implements Renderer
      */
     public function supportsContentType($contentType)
     {
-        return in_array($contentType, [ null, 'text/html' ]);
+        return in_array($contentType, [ null, 'text/html', '*/*' ]);
     }
 
     /**
