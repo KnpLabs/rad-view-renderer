@@ -33,8 +33,9 @@ class ControllerRendererSpec extends ObjectBehavior
         $this->supportsContentType('test')->shouldReturn($result);
     }
 
-    function it_will_render_a_template($renderer, $data, $result)
+    function it_will_render_a_template($renderer, $data, $result, $request)
     {
+        $request->isXmlHttpRequest()->willReturn(false);
         $renderer
             ->renderResponse(['template' => 'Framework:Template:template.html.twig', 'parameters' => $data])
             ->willReturn($result)
@@ -47,6 +48,20 @@ class ControllerRendererSpec extends ObjectBehavior
     function it_will_render_a_subtemplate_if_exists($renderer, $data, $result, $stack, Request $other)
     {
         $stack->getMasterRequest()->willReturn($other);
+        $renderer->templateExists('Framework:Template:_template.html.twig')->willReturn(true);
+
+        $renderer
+            ->renderResponse(['template' => 'Framework:Template:_template.html.twig', 'parameters' => $data])
+            ->willReturn($result)
+            ->shouldBeCalledTimes(1)
+        ;
+
+        $this->renderResponse($data)->shouldReturn($result);
+    }
+
+    function it_will_render_a_subtemplate_if_exists_with_xhr_request($renderer, $data, $result, $stack, $request)
+    {
+        $request->isXmlHttpRequest()->willReturn(true);
         $renderer->templateExists('Framework:Template:_template.html.twig')->willReturn(true);
 
         $renderer

@@ -62,7 +62,7 @@ class ControllerRenderer implements Renderer
 
         $template = $this->buildTemplate($request);
 
-        if (false === $this->isMasterRequest($request)) {
+        if (false === $this->isMasterRequest($request) || true === $request->isXmlHttpRequest()) {
             $other = $this->buildTemplate($request, '_');
             if ($this->renderer->templateExists($other)) {
                 $template = $other;
