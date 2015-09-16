@@ -6,9 +6,16 @@ use Knp\Rad\ViewRenderer\Reflection\Factory as ReflectionFactory;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class BundleGuesser
+class Guesser
 {
+    /**
+     * @var KernelInterface
+     */
     private $kernel;
+
+    /**
+     * @var ReflectionFactory
+     */
     private $reflection;
 
     public function __construct(KernelInterface $kernel, ReflectionFactory $reflection)
@@ -35,25 +42,24 @@ class BundleGuesser
             $rfl = $rfl->getParentClass();
         } while (null !== $rfl);
 
-        return null;
+        return;
     }
 
     /**
      * @param string $class
      *
-     * @return boolean
+     * @return bool
      */
     public function hasBundleForClass($class)
     {
         return null !== $this->getBundleForClass($class);
     }
 
-
     /**
-     * @param string $class
+     * @param string          $class
      * @param BundleInterface $bundle
      *
-     * @return boolean
+     * @return bool
      */
     public function isClassInBundle($class, BundleInterface $bundle)
     {
@@ -64,6 +70,11 @@ class BundleGuesser
         return true === strpos($class->getNamespaceName(), $bundle->getNamespace());
     }
 
+    /**
+     * @param string $name
+     *
+     * @return Bundle
+     */
     public function getBundleByName($name)
     {
         foreach ($this->kernel->getBundles as $bundle) {
@@ -72,6 +83,6 @@ class BundleGuesser
             }
         }
 
-        return null;
+        return;
     }
 }
