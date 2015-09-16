@@ -12,10 +12,15 @@ class ViewRendererExtension extends Extension
     /**
      * {@inheritDoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
+        $config = $this->processConfiguration(new Configuration(), $configs);
+
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $listener = $container->getDefinition('knp_rad_view_renderer.event_listener.view_listener');
+        $listener->setArguments([$config['allowed_content_types']]);
     }
 
     /**
