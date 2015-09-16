@@ -40,6 +40,17 @@ By default the rad view renderer will take a look of the **request content type*
 in order to guess wich kind of render it will use. It exists many kind of renderer
 that can display many content types.
 
+You can specify the allowed content types via the `allowed_content_types` config parameter. 
+By default `text/html` & `application/json` content types are allowed. But you can override this :
+```yaml
+# app/config/config.yml
+knp_rad_view_renderer:
+    allowed_content_types: [html, json]
+```
+
+As seen above, in order to make this more simpler to configure, you can use `html` & `json` content types 
+as alias of `text/html` & `application/json`.
+
 ### The twig renderer
 
 One of the most useful renderer, it takes the controller class in order to

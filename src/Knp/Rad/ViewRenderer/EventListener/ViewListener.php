@@ -9,6 +9,16 @@ use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 class ViewListener
 {
+    /**
+     * @var array
+     */
+    private $contentTypes;
+
+    /**
+     * @var Renderer[]
+     */
+    private $renderers;
+
     public function __construct(array $contentTypes)
     {
         $this->contentTypes = $contentTypes;
