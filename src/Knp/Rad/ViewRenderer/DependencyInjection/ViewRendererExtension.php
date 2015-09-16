@@ -19,8 +19,7 @@ class ViewRendererExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $listener = $container->getDefinition('knp_rad_view_renderer.event_listener.view_listener');
-        $listener->setArguments([$config['allowed_content_types']]);
+        $container->setParameter('knp_rad_view_renderer.enabled_native_renderers', $config['renderers']);
     }
 
     /**

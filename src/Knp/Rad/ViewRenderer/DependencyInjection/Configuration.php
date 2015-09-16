@@ -12,20 +12,14 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode    = $treeBuilder->root('knp_rad_view_renderer');
 
-        $types = [
-            'html' => 'text/html',
-            'json' => 'application/json',
-        ];
-
         $rootNode
             ->children()
-                ->arrayNode('allowed_content_types')
-                    ->defaultValue(array_values($types))
+                ->arrayNode('renderers')
+                    ->defaultValue(['controller', 'jms_serializer', 'rest', 'twig'])
                     ->prototype('scalar')
-                        ->beforeNormalization()
-                            ->ifTrue(function ($allowedType) use ($types) { return isset($types[$allowedType]); })
-                                ->then(function ($allowedType) use ($types) { return $types[$allowedType]; })
-                            ->end()
+                        ->validate()
+                        ->ifNotInArray(['controller', 'jms_serializer', 'rest', 'twig'])
+                            ->thenInvalid('Invalid renderer "%s".')
                         ->end()
                     ->end()
                 ->end()

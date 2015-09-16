@@ -4,7 +4,6 @@ namespace Knp\Rad\ViewRenderer\Renderer;
 
 use Knp\Rad\ViewRenderer\Controller\Guesser as ControllerGuesser;
 use Knp\Rad\ViewRenderer\Renderer;
-use Knp\Rad\ViewRenderer\Renderer\TwigRenderer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
