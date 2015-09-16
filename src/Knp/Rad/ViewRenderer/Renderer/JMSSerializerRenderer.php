@@ -5,6 +5,7 @@ namespace Knp\Rad\ViewRenderer\Renderer;
 use JMS\Serializer\SerializerInterface;
 use Knp\Rad\ViewRenderer\Renderer;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 
 class JMSSerializerRenderer implements Renderer
 {
@@ -53,7 +54,9 @@ class JMSSerializerRenderer implements Renderer
             return $format;
         }
 
-        return end(explode($this->getRequest()->getContentType()));
+        $acceptables = $this->getRequest()->getAcceptableContentTypes();
+
+        return end((explode('/', array_shift($acceptables))));
     }
 
     /**

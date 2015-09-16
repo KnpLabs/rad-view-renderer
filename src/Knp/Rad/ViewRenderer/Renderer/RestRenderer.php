@@ -9,8 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RestRenderer implements MetaRenderer
 {
-
+    /** @var RequestStack */
     private $stack;
+
+    /** @var Renderer */
+    private $renderer;
+
     private $codes = [
         'POST'   => Response::HTTP_CREATED,
         'GET'    => Response::HTTP_OK,
@@ -19,7 +23,7 @@ class RestRenderer implements MetaRenderer
         'DELETE' => Response::HTTP_OK,
     ];
 
-    public function __construct(RequestStack $stask)
+    public function __construct(RequestStack $stack)
     {
         $this->stack = $stack;
     }
