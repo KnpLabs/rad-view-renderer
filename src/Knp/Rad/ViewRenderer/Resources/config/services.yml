@@ -1,36 +1,34 @@
 services:
-    knp_rad_view_renderer.event_listener.view_listener:
-        class: Knp\Rad\ViewRenderer\EventListener\ViewListener
-        arguments:
-            - []
-        tags:
-            - { name: kernel.event_listener, event: kernel.view, method: onView }
-
-    knp_rad_view_renderer.renderer.controller_renderer:
-        class: Knp\Rad\ViewRenderer\Renderer\ControllerRenderer
-        arguments:
-            - @request_stack
-            - @knp_rad_view_renderer.renderer.twig_renderer
-            - @knp_rad_view_renderer.controller.guesser
-        tags:
-            - { name: knp_rad_view_renderer.renderer }
-
-    knp_rad_view_renderer.renderer.rest_renderer:
-        class: Knp\Rad\ViewRenderer\Renderer\RestRenderer
-        arguments:
-            - @request_stack
-        tags:
-            - { name: knp_rad_view_renderer.renderer }
-
-    knp_rad_view_renderer.renderer.twig_renderer:
-        class: Knp\Rad\ViewRenderer\Renderer\TwigRenderer
-        arguments:
-            - @templating
-        tags:
-            - { name: knp_rad_view_renderer.renderer }
-
-    knp_rad_view_renderer.controller.guesser:
+    knp_rad_view_transformer.controller.guesser:
         class: Knp\Rad\ViewRenderer\Controller\Guesser
         arguments:
           - @service_container
           - @controller_name_converter
+
+    knp_rad_view_transformer.event_listener.view_listener:
+        class: Knp\Rad\ViewRenderer\EventListener\ViewListener
+        arguments:
+            renderers:
+                - @knp_rad_view_transformer.transformer.controller_transformer
+                - @knp_rad_view_transformer.transformer.partial_template_transformer
+                - @knp_rad_view_transformer.transformer.twig_transformer
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, method: onView }
+
+    knp_rad_view_transformer.transformer.controller_transformer:
+        class: Knp\Rad\ViewRenderer\Transformer\ControllerTransformer
+        arguments:
+            - @request_stack
+            - @knp_rad_view_transformer.controller.guesser
+
+    knp_rad_view_transformer.transformer.partial_template_transformer:
+        class: Knp\Rad\ViewRenderer\Transformer\PartialTemplateTransformer
+        arguments:
+            - @request_stack
+            - @templating
+
+    knp_rad_view_transformer.transformer.twig_transformer:
+        class: Knp\Rad\ViewRenderer\Transformer\TwigTransformer
+        arguments:
+            - @templating
+

@@ -3,7 +3,6 @@
 namespace spec\Knp\Rad\ViewRenderer\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -16,7 +15,7 @@ class GuesserSpec extends ObjectBehavior
         $this->beConstructedWith($container, $parser);
 
         $parser->build('Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction')->willReturn('Framework:Template:template');
-        $container->get('framework.template')->willReturn(new \Symfony\Bundle\FrameworkBundle\Controller\TemplateController);
+        $container->get('framework.template')->willReturn(new \Symfony\Bundle\FrameworkBundle\Controller\TemplateController());
         $request->attributes = $attributes;
     }
 
@@ -63,7 +62,7 @@ class GuesserSpec extends ObjectBehavior
         $attributes->get('_controller', null)->willReturn('Test:::testAction');
 
         $this
-            ->shouldThrow(new \Exception('Can\'t deduce controller, buncle and action names from the given string : "Test:::testAction".'))
+            ->shouldThrow(new \Exception('Can\'t deduce controller, bundle and action names from the given string : "Test:::testAction".'))
             ->duringGetInformationFromRequest($request)
         ;
     }
