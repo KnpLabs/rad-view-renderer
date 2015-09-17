@@ -4,6 +4,7 @@ namespace Knp\Rad\ViewRenderer\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 class RendererPass implements CompilerPassInterface
@@ -37,9 +38,12 @@ class RendererPass implements CompilerPassInterface
     private function disableJmsSerializerRenderer(ContainerBuilder $container)
     {
         if ($container->has('jms_serializer')) {
-            return;
+            $container->setDefinition(
+                'knp_rad_view_renderer.renderer.jms_serializer_renderer',
+                (new Definition('Knp\Rad\ViewRenderer\Renderer\JMSSerializerRenderer'))
+                    ->setArguments([new Reference('jms_serializer'), new Reference('request_stack')])
+                    ->addTag('knp_rad_view_renderer.renderer')
+            );
         }
-
-        $container->removeDefinition('knp_rad_view_renderer.renderer.jms_serializer');
     }
 }

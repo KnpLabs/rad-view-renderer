@@ -15,14 +15,6 @@ services:
         tags:
             - { name: knp_rad_view_renderer.renderer }
 
-    knp_rad_view_renderer.renderer.jms_serializer_renderer:
-        class: Knp\Rad\ViewRenderer\Renderer\JMSSerializerRenderer
-        arguments:
-            - @jms_serializer
-            - @request_stack
-        tags:
-            - { name: knp_rad_view_renderer.renderer }
-
     knp_rad_view_renderer.renderer.rest_renderer:
         class: Knp\Rad\ViewRenderer\Renderer\RestRenderer
         arguments:
