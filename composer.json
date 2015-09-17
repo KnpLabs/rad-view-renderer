@@ -19,6 +19,9 @@
         "phpspec/phpspec": "~2.1",
         "jms/serializer": "^1.0"
     },
+    "suggest": {
+        "jms/serializer": "Needed if you want to render JSON responses."
+    },
     "autoload": {
         "psr-0": {
             "Knp\\Rad\\ViewRenderer": "src/"
