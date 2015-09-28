@@ -38,6 +38,11 @@ class RendererPass implements CompilerPassInterface
     private function disableJmsSerializerRenderer(ContainerBuilder $container)
     {
         if ($container->has('jms_serializer')) {
+            $container
+                ->getDefinition('knp_rad_view_renderer.renderer.rest_renderer')
+                ->addMethodCall('setRenderer', [new Reference('knp_rad_view_renderer.renderer.jms_serializer_renderer')])
+            ;
+
             $container->setDefinition(
                 'knp_rad_view_renderer.renderer.jms_serializer_renderer',
                 (new Definition('Knp\Rad\ViewRenderer\Renderer\JMSSerializerRenderer'))
