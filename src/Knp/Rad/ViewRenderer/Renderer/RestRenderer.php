@@ -56,7 +56,7 @@ class RestRenderer implements MetaRenderer
                 : $statusCode
             ;
 
-            $response->setStatusCode($statusCode, Response::$statusText[$statusCode]);
+            $response->setStatusCode($statusCode, Response::$statusTexts[$statusCode]);
         }
 
         return $response;
