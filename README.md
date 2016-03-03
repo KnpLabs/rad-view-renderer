@@ -3,6 +3,10 @@ Rad view renderer
 
 Allow to guess a view when the controller does not return a Response.
 
+[![Build Status](https://travis-ci.org/KnpLabs/rad-view-renderer.svg?branch=master)](https://travis-ci.org/KnpLabs/rad-view-renderer)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/KnpLabs/rad-view-renderer/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/KnpLabs/rad-view-renderer/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/knplabs/rad-view-renderer/v/stable)](https://packagist.org/packages/knplabs/rad-view-renderer) [![Total Downloads](https://poser.pugx.org/knplabs/rad-view-renderer/downloads)](https://packagist.org/packages/knplabs/rad-view-renderer) [![Latest Unstable Version](https://poser.pugx.org/knplabs/rad-view-renderer/v/unstable)](https://packagist.org/packages/knplabs/rad-view-renderer) [![License](https://poser.pugx.org/knplabs/rad-view-renderer/license)](https://packagist.org/packages/knplabs/rad-view-renderer)
+
 ## Installation
 
 Install the library:
