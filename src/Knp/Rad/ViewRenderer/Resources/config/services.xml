@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <services>
+
+    <service id="knp_rad_view_renderer.event_listener.view_listener" class="Knp\Rad\ViewRenderer\EventListener\ViewListener">
+      <tag name="kernel.event_listener" event="kernel.view" method="onView"/>
+      <argument type="collection"/>
+    </service>
+
+    <service id="knp_rad_view_renderer.renderer.controller_renderer" class="Knp\Rad\ViewRenderer\Renderer\ControllerRenderer">
+      <tag name="knp_rad_view_renderer.renderer"/>
+      <argument type="service" id="request_stack"/>
+      <argument type="service" id="knp_rad_view_renderer.renderer.twig_renderer"/>
+      <argument type="service" id="knp_rad_view_renderer.controller.guesser"/>
+    </service>
+
+    <service id="knp_rad_view_renderer.renderer.rest_renderer" class="Knp\Rad\ViewRenderer\Renderer\RestRenderer">
+      <tag name="knp_rad_view_renderer.renderer"/>
+      <argument type="service" id="request_stack"/>
+    </service>
+
+    <service id="knp_rad_view_renderer.renderer.twig_renderer" class="Knp\Rad\ViewRenderer\Renderer\TwigRenderer">
+      <tag name="knp_rad_view_renderer.renderer"/>
+      <argument type="service" id="templating"/>
+    </service>
+
+    <service id="knp_rad_view_renderer.controller.guesser" class="Knp\Rad\ViewRenderer\Controller\Guesser">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="controller_name_converter"/>
+    </service>
+
+  </services>
+</container>

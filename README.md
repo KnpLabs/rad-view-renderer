@@ -11,7 +11,7 @@ Install the library:
 $ composer require knplabs/rad-view-renderer
 ```
 
-If you are using symfony2, add the bundle inside your `AppKernel.php`:
+If you are using Symfony, add the bundle inside your `AppKernel.php`:
 
 ```php
 $bundles = array(
